@@ -15,10 +15,10 @@ return one;
 int main ()
 {
     int digit;
-    std::cout<<"Program do liczenia ilosci jedynek w kodzie binarnym."<<std::endl;
-    std::cout<<"Prosze podac liczbe do sprawdzenia."<<std::endl;
-    std::cin>> digit;
-    std::cout<<"Podana liczba posiada: "<<how_many_ones(digit)<<" jedynek w kodzie binarnym"<<std::endl;
+    std::cout << "Program do liczenia ilosci jedynek w kodzie binarnym." << std::endl;
+    std::cout << "Prosze podac liczbe do sprawdzenia." << std::endl;
+    std::cin >> digit;
+    std::cout << "Podana liczba posiada: " << how_many_ones(digit) << " jedynek w kodzie binarnym" << std::endl;
 
 
 return 0;
