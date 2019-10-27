@@ -1,34 +1,46 @@
 #include <iostream>
+#include <string>
 #define PI 3.14
 
 
-void menuBox(); 		
-void menuDecision(int);
-double poleKola(double);
-double poleKwadratu(double);
-double poleProstokata(double,double);
-double poleTrojkata(double,double);
+void menuBox (); 		
+void menuDecision (int);
+double poleKola (double);
+double poleKwadratu (double);
+double poleProstokata (double,double);
+double poleTrojkata (double,double);
+bool jestDobrze (std::string);
+bool jestDobrze ();
 
-
-main()
+int main ()
 {
     int wybor;
     char zn;
 
     do
     {
-    std::system("clear");
+    std::system ("clear");
 
-    menuBox(); 
+    menuBox (); 
 
-    std::cin>>wybor;
+    while (!(std::cin >> wybor))
+	  {
+	  std::cin.clear();
+	  std::cin.ignore (1000, '\n');
+	  std::system ("clear");
+	  
+	  menuBox ();
+	  std::cout << "Na pewno nie podales wartosci z przedzialu 1-4" << std::endl;
+          }
+    
 
-    menuDecision(wybor);
+    menuDecision (wybor);
 
     do
 	{
-	    std::cout<<"Czy chcesz kontynuowac program? (T/N)" << std::endl;
-	    std::cin>> zn;
+	    std::cout << "Czy chcesz kontynuowac program? (T/N)" << std::endl;
+	    std::cin >> zn;
+	    std::cin.ignore (2222, '\n');
 	}while (zn != 't' && zn != 'T' && zn != 'n' && zn != 'N');
     }while (zn == 't' || zn == 'T');    
 
@@ -47,60 +59,91 @@ void menuBox ()
 }
 
 
-void menuDecision(int  wybor)
+void menuDecision (int wybor)
 {
-    switch(wybor)
+    switch (wybor)
     {
 	int a, b;
 	case 1:
+	    do
+	    {
+	    std::cout << "Podaj promien: " << std:: endl;
 	    std::cin>>a;
-	    poleKola(a);
+	    }
+	    while (!jestDobrze("zle, podales niepoprawna dana\n" ));
+	    poleKola (a);
 	    break;
 	case 2:
-	    std::cin>>a;
-	    poleKwadratu(a);
+            do
+            {
+            std::cout << "Podaj bok kwardratu: " << std:: endl;
+            std::cin >> a;
+            }
+            while (!jestDobrze("zle, podales niepoprawna dana\n" ));
+
+	    poleKwadratu (a);
             break;
 	case 3:
-	    std::cin>>a>>b;
-	    poleProstokata(a, b);
+            do
+            {
+            std::cout << "Podaj boki prostokata: " << std:: endl;
+            std::cin >> a >> b ;
+            }
+            while (!jestDobrze("zle, podales niepoprawna dana\n" ));
+	    poleProstokata (a, b);
             break;
 	case 4:
-	    std::cin>>a>>b;
-	    poleTrojkata(a,b);
+            do
+            {
+            std::cout << "Podaj podstawe i wysokosc trojkata: " << std:: endl;
+            std::cin >> a >> b;
+            }
+            while (!jestDobrze ("zle, podales niepoprawna dana\n " ));
+	    
+	    poleTrojkata (a,b);
 	    break;
 	default:
-	    std::cout<<"Na pewno nie wybrales odpowiedniej opcji z menu."<<std::endl;
+	    std::cout << "Na pewno nie wybrales odpowiedniej opcji z menu." << std::endl;
     }
 }
 
 
-double poleKola(double a)
+double poleKola (double a)
 {
     double wynik = PI * a * a;
 
-    std::cout<<"Pole kola wynosi: "<<wynik<<std::endl;
+    std::cout << "Pole kola wynosi: " << wynik << std::endl;
 }
 
 double poleKwadratu (double a)
 {
     double wynik = a * a;
 
-    std::cout<<"Pole kwadratu wynosi: "<<wynik<<std::endl;
+    std::cout << "Pole kwadratu wynosi: " << wynik << std::endl;
 }
-double poleProstokata (double a,double b)
+double poleProstokata (double a, double b)
 {
     double wynik = a * b;
 
-    std::cout<<"Pole prostokata wynosi: "<<wynik<<std::endl;
-}double poleTrojkata (double a,double b)
+    std::cout << "Pole prostokata wynosi: " << wynik << std::endl;
+}double poleTrojkata (double a, double b)
 {
     double wynik = 0.5 * a * b;
 
-    std::cout<<"Pole trojkata wynosi: "<<wynik<<std::endl;
+    std::cout << "Pole trojkata wynosi: " << wynik << std::endl;
 }
 
+bool jestDobrze(std::string error_msg)
+{
+    if (std::cin.rdstate())
+	{
+	std::cin.clear();
+	std::cin.ignore(1000, '\n');
 
-
-
-
-
+	std::system ("clear");
+	menuBox();
+	std::cout << error_msg;
+	return false;
+	}
+    return true;
+}
