@@ -89,7 +89,7 @@ void MenuDecision (int option)
 	case 4:
             do
             {
-              std::cout << "Enter : " << std:: endl;
+              std::cout << "Enter ground and high: " << std:: endl;
               std::cin >> a >> b;
             }
             while(!IsRight ("Wrong, you provided an invalid data"));
